@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
 import ReactPaginate from "react-paginate";
+import ImageDetector from './ImageDetector';
 import "./gallery.css";
+import {Route, BrowserRouter as Router, Link, useHistory} from 'react-router-dom';
 
 const PER_PAGE = 8;
 
 export default function Gallery(props) {
 
-  const {images, openCanvas, dataRaw} = props;
-
-  console.log("DATA PASSED TO GALLERY", dataRaw);
-
+  const {images, dataRaw} = props;
+  
+  const history = useHistory();
   const [currentPage, setCurrentPage] = useState(0);
   const data = images;
   function handlePageClick({ selected: selectedPage }) {
@@ -20,13 +21,12 @@ export default function Gallery(props) {
 
   const currentPageData = data
     .slice(offset, offset + PER_PAGE)
-    .map((data) => <img src={data.coco_url} onClick={() => openCanvas(data)}/>);
+    .map((data) => <img src={data.coco_url}  onClick={()=> {history.push({pathname: '/canvas', state: {selectedImage: data, annotations: dataRaw.annotations, categories: dataRaw.categories}});}}></img>);
 
   const pageCount = Math.ceil(data.length / PER_PAGE);
 
   return (
-    <div className="App">
-      <h1>Image gallery</h1>
+      <div className="App">
       <div className = "imageGrid">
         {currentPageData}
       </div>
