@@ -5,7 +5,7 @@ const ImageDetector = (props) => {
 
   const { selectedImage, annotations, categories } = props.location.state;
   const imageId = selectedImage.id;
-  const imageUrl = selectedImage.coco_url;
+  const imageUrl = selectedImage.flickr_url;
   const width = selectedImage.width;
   const height = selectedImage.height;
   const annotationsArray = [];
@@ -24,7 +24,7 @@ const ImageDetector = (props) => {
   function renderCanvas() {
     paper.setup("paper-canvas");
     var raster = new paper.Raster({
-      source: selectedImage.coco_url,
+      source: selectedImage.flickr_url,
       position: paper.view.center,
     });
 
@@ -83,7 +83,7 @@ const ImageDetector = (props) => {
     clearCanvas();
 
     var raster = new paper.Raster({
-      source: selectedImage.coco_url,
+      source: selectedImage.flickr_url,
       position: paper.view.center,
     });
 

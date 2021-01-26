@@ -21,7 +21,7 @@ export default function Gallery(props) {
 
   const currentPageData = data
     .slice(offset, offset + PER_PAGE)
-    .map((data) => <img src={data.coco_url}  onClick={()=> {history.push({pathname: '/canvas', state: {selectedImage: data, annotations: dataRaw.annotations, categories: dataRaw.categories}});}}></img>);
+    .map((data) => <img src={data.flickr_url}  onClick={()=> {history.push({pathname: '/canvas', state: {selectedImage: data, annotations: dataRaw.annotations, categories: dataRaw.categories}});}}></img>);
 
   const pageCount = Math.ceil(data.length / PER_PAGE);
 
